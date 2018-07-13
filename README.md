@@ -2,19 +2,20 @@
 
 ## Table of Contents
 
-* [Instructions](#instructions)
-* [Contributing](#contributing)
+* [About this project](#about)
+* [Dependencies](#dependencies)
 
-## Instructions
 
-The starter project has some HTML and CSS styling to display a static version of the Memory Game project. You'll need to convert this project from a static project to an interactive one. This will require modifying the HTML and CSS files, but primarily the JavaScript file.
+## About this project
 
-To get started, open `js/app.js` and start building out the app's functionality
+This project is based on the Memory Game project from Udacity's Front End Developer course. This app utilizes HTML, CSS and JavaScript to create a game where the user matches 8 pairs of cards. To play this game, run the index.html file in your browser. 
 
-For specific, detailed instructions, look at the project instructions in the [Udacity Classroom](https://classroom.udacity.com/me).
+This game should work with browsers that support ES6 methods.
 
-## Contributing
+## Dependencies
 
-This repository is the starter code for _all_ Udacity students. Therefore, we most likely will not accept pull requests.
+This app uses icon fonts from fontAwesome. Text font Coda from Google APIs.
 
-For details, check out [CONTRIBUTING.md](CONTRIBUTING.md).
+
+
+
