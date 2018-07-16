@@ -13,7 +13,7 @@ const cardOrder=[];
 
 // Shuffle function from http://stackoverflow.com/a/2450976
 function shuffle(array) {
-    var currentIndex = array.length, temporaryValue, randomIndex;
+    let currentIndex = array.length, temporaryValue, randomIndex;
 
     while (currentIndex !== 0) {
         randomIndex = Math.floor(Math.random() * currentIndex);
@@ -56,12 +56,32 @@ shuffleCards();
 const cards = document.getElementsByClassName("card");
 
 
+let listLocked = false; 
 
 deck.addEventListener("click",cardClicked);
 
 function cardClicked(evt){
-	displaySymbol(evt);
-	addCardToList(evt.target);
+  console.log("You clicked", evt.target);
+  //only do stuff to cards so you can't click the same card twice.
+  if(evt.target.className.indexOf("deck") > -1){
+    return;
+  }
+
+  if (!listLocked){
+
+    listLocked=true;
+    console.log("Locking the click");
+    //wait 0.5 seconds to unlock the list (length of CSS animation)
+    setTimeout(function(){
+      if(listLocked = true){
+       listLocked = false;
+      }
+      console.log("click is unlocked.");
+    },1000);
+
+  	displaySymbol(evt);
+  	addCardToList(evt.target);
+  }
 }
 
 function displaySymbol(evt){
@@ -82,27 +102,32 @@ function incrementTurn(){
 	moveCount.textContent = turnCounter;
 }
 
+
+
 //Function to add the card to a list of cards
 function addCardToList(ele){
-	cardList.push(ele);
-	//create a function that compares the cards to each other as long as there are two cards added to the list
-	if(cardList.length > 0 && cardList.length % 2 === 0){
-		let cardsMatch = cardCompare(cardList[cardList.length-1], cardList[cardList.length-2]);
-		incrementTurn();
-		//if the cards do not match, then set the CSS properties to hidden and remove them from the list 
-		if(cardsMatch === false){
-			setTimeout(matchNegative, 1000);
-		}else{
-			matchPositive();
-			//bring up a modal if all the cards are matched  
-				if(cardList.length == 16){
-					modalShow();
-				}
-		}
-	}
 
-
+  cardList.push(ele);
+  console.log("pushing card to list");
+  //create a function that compares the cards to each other as long as there are two cards added to the list
+  if(cardList.length > 0 && cardList.length % 2 === 0){
+    let cardsMatch = cardCompare(cardList[cardList.length-1], cardList[cardList.length-2]);
+    incrementTurn();
+    //if the cards do not match, then set the CSS properties to hidden and remove them from the list 
+    if(cardsMatch === false){
+      setTimeout(matchNegative, 1000);
+    }else{
+      matchPositive();
+      //bring up a modal if all the cards are matched  
+      if(cardList.length == 16){
+        modalShow();
+      }
+    } 
+  }
 }
+
+
+
 
 //create a function to remove the cards from the list if they do not match
 function matchNegative(){
@@ -142,10 +167,10 @@ let paused = false;
 function timer(){
   const timerValue = document.querySelector(".timerCount");
   if(!paused){
-    setTimeout(timer,1000);
     time++;
     timerValue.textContent = time;
   }
+   setTimeout(timer,1000);
 }
 
 setTimeout(timer,1000);
@@ -216,7 +241,7 @@ function resetTimer(){
   time = 0;
   timerValue.textContent = time;
   paused=false;
-  setTimeout(timer,1000);
+  //setTimeout(timer,1000);
 }
 
 //Function to reset the stars displayed above the grid
